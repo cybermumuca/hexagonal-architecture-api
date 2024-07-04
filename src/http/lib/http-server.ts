@@ -67,7 +67,7 @@ export default class HttpServer {
       "(?<$1>[a-z0-9-_]+)"
     );
 
-    const pathRegex = new RegExp(`^${pathWithParams}(?<query>\\?(.*))?$`);
+    const pathRegex = new RegExp(`^${pathWithParams}(?<query>\\?(.*))?$`, "i");
 
     return pathRegex;
   }
