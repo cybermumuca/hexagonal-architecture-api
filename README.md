@@ -11,4 +11,5 @@ Uma API leve implementada usando Arquitetura Hexagonal, sem dependência de fram
 - **test/**: Testes de integração.
 
 ## Licença
-Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+
+Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](./LICENSE) para mais detalhes.
