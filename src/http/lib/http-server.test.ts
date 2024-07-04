@@ -75,7 +75,7 @@ describe("Http Server", () => {
       },
     ]);
 
-    server = app.listen(3000);
+    server = app.listen(0);
   });
 
   afterAll(() => {
@@ -83,14 +83,14 @@ describe("Http Server", () => {
   });
 
   it("should handle a global middleware", async () => {
-    const response = await request("http://localhost:3000").get("");
+    const response = await request(server).get("");
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual({ message: "Hello from global middleware" });
   });
 
   it("should handle a chain of global middlewares", async () => {
-    const response = await request("http://localhost:3000").get("/2");
+    const response = await request(server).get("/2");
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
@@ -99,7 +99,7 @@ describe("Http Server", () => {
   });
 
   it("should respond with a JSON message from route middleware", async () => {
-    const response = await request("http://localhost:3000").get(
+    const response = await request(server).get(
       "/api/middleware"
     );
 
@@ -108,21 +108,21 @@ describe("Http Server", () => {
   });
 
   it("should respond with a JSON message from route handler", async () => {
-    const response = await request("http://localhost:3000").get("/api/hello");
+    const response = await request(server).get("/api/hello");
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual({ message: "Hello, world!" });
   });
 
   it("should found route with dynamic path", async () => {
-    const response = await request("http://localhost:3000").get("/test/5");
+    const response = await request(server).get("/test/5");
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual({ message: "id: 5" });
   });
 
   it("should return HTTP status code 404 for non-existent route", async () => {
-    const response = await request("http://localhost:3000").get(
+    const response = await request(server).get(
       "/api/non-existent"
     );
 
@@ -131,7 +131,7 @@ describe("Http Server", () => {
   });
 
   it("should return HTTP status code 400 if request body is unformatted", async () => {
-    const response = await request("http://localhost:3000")
+    const response = await request(server)
       .post("/api/body-test")
       .send("{");
 
