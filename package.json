@@ -1,8 +1,7 @@
 {
-  "name": "poc-port-and-adapters",
+  "name": "hexagonal-architecture-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A lightweight API implemented using Hexagonal Architecture, without relying on HTTP frameworks.",
   "scripts": {
     "test": "vitest run --globals",
     "test:unit": "vitest run --globals src/application/domain/**/*.test.ts",
@@ -15,6 +14,7 @@
   "keywords": [],
   "author": "Samuel Laurindo",
   "license": "MIT",
+  "private": "true",
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/better-sqlite3": "^7.6.10",
