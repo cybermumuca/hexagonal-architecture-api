@@ -4,10 +4,10 @@
   "description": "A lightweight API implemented using Hexagonal Architecture, without relying on HTTP frameworks.",
   "scripts": {
     "test": "vitest run --globals",
-    "test:unit": "vitest run --globals src/application/domain/**/*.test.ts",
-    "test:integration": "vitest run --globals test/integration/*.test.*",
+    "test:unit": "vitest run --globals src/application/domain",
+    "test:integration": "vitest run --globals test/integration",
     "test:lib": "vitest run --globals src/http/lib",
-    "test:e2e": "vitest run --globals src/http/controllers/*.test.ts",
+    "test:e2e": "vitest run --globals src/http/controllers",
     "dev": "tsx src/http/server.ts",
     "build": "tsc -p tsconfig.build.json",
     "start": "node dist/http/server.js"
