@@ -19,7 +19,7 @@
 - [📊 Modelagem Física](#-modelagem-física)
   - [📄 Detalhes sobre as Tabelas](#-detalhes-sobre-as-tabelas)
   - [💡 Considerações](#-considerações)
-- [🌐 Endpoints da Aplicação](#-endpoints-da-aplicação)
+- [📍 Endpoints da Aplicação](#-endpoints-da-aplicação)
 - [🏗️ Arquitetura Hexagonal](#️-arquitetura-hexagonal)
 - [🧪 Testes](#-testes)
   - [⚡ Testes Unitários](#-testes-unitários)

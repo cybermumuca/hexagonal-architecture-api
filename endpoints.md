@@ -1,17 +1,17 @@
-# Endpoints
+# 📍 Endpoints
 
-| Método HTTP | Endpoint               | Descrição                                         |
-| ----------- | ---------------------- | ------------------------------------------------- |
-| POST        | /auth/register         | Registra o usuário.                               |
-| POST        | /auth/signin           | Autentica o usuário.                              |
-| GET         | /auth/me               | Retorna dados do usuário autenticado.             |
-| POST        | /categories            | Cria uma nova categoria.                          |
-| GET         | /categories            | Faz paginação nas categorias.                     |
-| GET         | /categories/{id}       | Obtém uma categoria específica por id.            |
-| GET         | /categories/{id}/posts | Obtém todos os posts de uma categoria específica. |
-| POST        | /posts                 | Cria um novo post.                                |
-| GET         | /posts                 | Faz paginação nos posts.                          |
-| GET         | /posts/{id}            | Obtém um post específico por id.                  |
+| Método HTTP | Endpoint                                         | Descrição                                         |
+| ----------- | ------------------------------------------------ | ------------------------------------------------- |
+| POST        | [/auth/register](#post-authregister)             | Registra o usuário.                               |
+| POST        | [/auth/signin](#post-authsignin)                 | Autentica o usuário.                              |
+| GET         | [/auth/me](#get-authme)                          | Retorna dados do usuário autenticado.             |
+| POST        | [/categories](#post-categories)                  | Cria uma nova categoria.                          |
+| GET         | [/categories](#get-categories)                   | Faz paginação nas categorias.                     |
+| GET         | [/categories/{id}](#get-categoriesid)            | Obtém uma categoria específica por id.            |
+| GET         | [/categories/{id}/posts](#get-categoriesidposts) | Obtém todos os posts de uma categoria específica. |
+| POST        | [/posts](#post-posts)                            | Cria um novo post.                                |
+| GET         | [/posts](#get-posts)                             | Faz paginação nos posts.                          |
+| GET         | [/posts/{id}](#get-postsid)                      | Obtém um post específico por id.                  |
 
 ## POST /auth/register
 
@@ -77,7 +77,7 @@ Autentica o usuário.
 
 ## GET /auth/me
 
-Retorna dados do usuário autenticado.
+Retorna dados do usuário autenticado. **Necessita de autenticação**.
 
 **REQUEST**
 
@@ -95,7 +95,7 @@ Retorna dados do usuário autenticado.
   }
   ```
 
-- 401 (Unauthorized): Token ausente.
+- 401 (Unauthorized): Token de autenticação ausente.
 
   ```json
   {
@@ -103,7 +103,7 @@ Retorna dados do usuário autenticado.
   }
   ```
 
-- 401 (Unauthorized): Token inválido.
+- 401 (Unauthorized): Token de autenticação inválido.
 
   ```json
   {
@@ -150,7 +150,21 @@ Cria uma nova categoria. **Necessita de autenticação**.
     }
     ```
 
-- 401 (Unauthorized): Não autenticado.
+- 401 (Unauthorized): Token não encontrado.
+
+  ```json
+  {
+    "message": "Token not found."
+  }
+  ```
+
+- 401 (Unauthorized): Token inválido.
+
+  ```json
+  {
+    "message": "Invalid token."
+  }
+  ```
 
 - 409 (Conflict): Categoria já existe.
 
@@ -192,6 +206,8 @@ Faz paginação nas categorias.
 - 204 (No Content): Nenhum item encontrado usando as queries especificadas.
 
 ## GET /categories/{id}
+
+Obtém uma categoria específica por id.
 
 **REQUEST**
 
@@ -321,7 +337,21 @@ Cria um novo post. **Necessita de autenticação.**
     }
     ```
 
-- 401 (Unauthorized): Não autenticado.
+- 401 (Unauthorized): Token de autenticação não encontrado.
+
+  ```json
+  {
+    "message": "Token not found."
+  }
+  ```
+
+- 401 (Unauthorized): Token de autenticação inválido.
+
+  ```json
+  {
+    "message": "Invalid token."
+  }
+  ```
 
 - 404 (Not Found): Uma das categorias especificadas não foi encontrada.
 
@@ -334,3 +364,72 @@ Cria um novo post. **Necessita de autenticação.**
 ## GET /posts
 
 Faz paginação nos posts.
+
+**REQUEST**
+
+- Query Parameters
+  - `?page=1`: Número da página (Padrão: 1).
+  - `?pageSize=10`: Quantidade máxima de itens na página (Padrão: 10).
+
+**RESPONSE**
+
+- 200 (OK): Resultados da paginação
+
+  ```json
+  {
+    "results": [
+      {
+        "id": "randompostid",
+        "content": "randompostcontent",
+        "authorId": "randomuserid",
+        "categories": [
+          {
+            "id": "randomcategoryid",
+            "name": "randomcategoryname"
+          }
+        ]
+      }
+    ],
+    "length": 1,
+    "page": 1,
+    "pageSize": 10,
+    "total": 1
+  }
+  ```
+
+- 204 (No Content): Nenhum item encontrado usando as queries especificadas.
+
+## GET /posts/{id}
+
+Obtém um post específico por id.
+
+**REQUEST**
+
+- Path Parameters
+  - `id`: id do post
+
+**RESPONSE**
+
+- 200 (OK): Informações do post especificado.
+
+  ```json
+  {
+    "id": "randompostid",
+    "content": "randompostcontent",
+    "authorId": "randomuserid",
+    "categories": [
+      {
+        "id": "randomcategoryid",
+        "name": "randomcategoryname"
+      }
+    ]
+  }
+  ```
+
+- 404 (No Content): Post não encontrado.
+
+  ```json
+  {
+    "message": "Category not found."
+  }
+  ```
