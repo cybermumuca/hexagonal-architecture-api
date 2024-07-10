@@ -21,6 +21,9 @@
   - [💡 Considerações](#-considerações)
 - [📍 Endpoints da Aplicação](#-endpoints-da-aplicação)
 - [🏗️ Arquitetura Hexagonal](#️-arquitetura-hexagonal)
+  - [🧩 Componentes da Arquitetura Hexagonal](#-componentes-da-arquitetura-hexagonal)
+  - [🌟 Vantagens da Arquitetura Hexagonal](#-vantagens-da-arquitetura-hexagonal)
+  - [📂 Organização de Diretórios](#-organização-de-diretórios)
 - [🧪 Testes](#-testes)
   - [⚡ Testes Unitários](#-testes-unitários)
   - [⚗️ Testes de Integração](#️-testes-de-integração)
@@ -216,7 +219,71 @@ Para mais informações de como usar os endpoints da API, acesse esse [documento
 
 ## 🏗️ Arquitetura Hexagonal
 
-<!-- Descrever a Arquitetura hexagonal -->
+A Arquitetura Hexagonal, também conhecida como Port and Adapters, foi proposta por Alistair Cockburn com o objetivo de criar sistemas altamente desacoplados e que possam ser facilmente testáveis e extensíveis. Nesta arquitetura, o núcleo da aplicação é isolado de qualquer biblioteca, framework ou serviço externo, facilitando a manutenção e evolução do software.
+
+### 🧩 Componentes da Arquitetura Hexagonal
+
+![Diagrama da Arquitetura Hexagonal](./hexagonal-architecture-diagram.png)
+
+Para alcançar o isolamento da aplicação em relação ao mundo externo, a arquitetura se baseia em três componentes fundamentais:
+
+- **Core**: O núcleo da aplicação, onde reside toda a lógica de negócio. Inclui entidades e casos de uso, encapsulando as regras de negócios e garantindo a independência de detalhes de implementação externa.
+
+- **Ports**: Interfaces que definem contratos para comunicação entre o núcleo da aplicação (Core) e o mundo externo. Os Ports são responsáveis por declarar como a aplicação interage com os sistemas externos (como bancos de dados, APIs, interfaces de usuário) sem acoplar diretamente o Core a essas implementações.
+
+- **Adapters**: Implementações concretas dos Ports. Os Adapters adaptam a comunicação entre o Core e o mundo externo, permitindo que diferentes tecnologias e serviços possam ser plugados e desplugados sem impactar a lógica central da aplicação. Eles podem ser divididos em dois tipos principais:
+  - **Driving Adapters**: Adaptadores que dirigem a aplicação, como interfaces de usuário (web, mobile) ou APIs REST.
+  - **Driven Adapters**: Adaptadores que são dirigidos pela aplicação, como repositórios de dados, serviços externos, e sistemas de mensageria.
+
+### 🌟 Vantagens da Arquitetura Hexagonal
+
+Por capitalizar fortemente em cima de conceitos/princípios como a **Inversão de Dependência** (DIP), **Injeção de dependência** (DI) e **Responsabilidade única** (SRP), temos como vantagem:
+
+1. **Testabilidade**: A Inversão de Dependência proporciona flexibilidade suficiente para facilitar os testes de unidade.
+2. **Flexibilidade**: Facilita a adição de novos componentes, serviços ou tecnologias.
+3. **Manutenibilidade**: A separação clara de responsabilidades torna o código mais compreensível e fácil de manter.
+
+### 📂 Organização de Diretórios
+
+**Estrutura de pastas não são arquiteturas**, mas são vitais para organizar a base de código de forma que facilite a manutenção, escalabilidade e entendimento do projeto. A maneira que as pastas são organizadas variam muito de projeto para projeto, no contexto atual ela se encontra dessa maneira:
+
+```bash
+src/
+├── application
+│   ├── core
+│   │   ├── entities
+│   │   └── utils
+│   └── domain
+│       ├── adapters
+│       ├── entities
+│       ├── ports
+│       ├── presenters
+│       └── use-cases
+└── http
+    ├── controllers
+    ├── lib
+    ├── middlewares
+    ├── protocols
+    └── routes
+
+```
+
+- **application**: Agrupa o núcleo da aplicação e seus utilitários.
+  - **core**: Utilitários gerais.
+    - **entities**: Utilitários de entidade.
+    - **utils**: Interfaces utilitárias.
+  - **domain**: Núcleo da aplicação.
+    - **adapters**: Implementações dos ports que permitem a integração com sistemas externos.
+    - **entities**: Define as entidades principais do domínio.
+    - **ports**: Interfaces que descrevem os contratos de comunicação entre o núcleo e os adapters.
+    - **presenters**: Responsáveis por formatar os dados para exibição.
+    - **use-cases**: Implementações dos casos de uso, encapsulando as regras de negócio.
+- **http**: Agrupa os componentes relacionados à interface HTTP da aplicação.
+  - **controllers**: Controladores que gerenciam as requisições HTTP.
+  - **lib**: Bibliotecas auxiliares utilizadas pelos controladores e middlewares HTTP.
+  - **middlewares**: Middleware HTTP para processamento de requisições e respostas.
+  - **protocols**: Protocolos de comunicação utilizados pelos controladores.
+  - **routes**: Definições das rotas HTTP da aplicação.
 
 ## 🧪 Testes
 
