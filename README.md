@@ -54,7 +54,7 @@ Siga os passos abaixo para configurar e executar o projeto:
 1. **Clone o repositório:**
 
    ```bash
-   git clone https://github.com/laurindosamuel/hexagonal-architecture-api.git
+   git clone https://github.com/cybermumuca/hexagonal-architecture-api.git
    ```
 
 2. **Instale as dependências:**
@@ -303,7 +303,7 @@ src/
 
 ## 👤 Autor
 
-Feito por [laurindosamuel](https://github.com/laurindosamuel). Se você tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato!
+Feito por [cybermumuca](https://github.com/cybermumuca). Se você tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato!
 
 ## ⚖️ Licença
 
