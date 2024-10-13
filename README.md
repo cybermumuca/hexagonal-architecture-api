@@ -287,19 +287,44 @@ src/
 
 ## 🧪 Testes
 
-<!-- Falar sobre testes automatizados -->
+Os testes automatizados são essenciais para garantir a qualidade, robustez e o funcionamento do código ao longo prazo. Este projeto adota uma abordagem abrangente de testes, incluindo testes unitários, de integração e de ponta a ponta (E2E).
+
+Para rodar os testes, utilize o comando:
+
+```bash
+pnpm test
+```
+
 
 ### ⚡ Testes Unitários
 
-<!-- Descrever os testes unitários -->
+Os testes unitários verificam o funcionamento isolado das menores unidades de código, geralmente funções ou métodos. Eles são rápidos e ajudam a identificar problemas de lógica e regra de negócio no início do desenvolvimento.
+
+Para rodar os testes unitários, utilize o comando:
+
+```bash
+pnpm test:unit
+```
 
 ### ⚗️ Testes de Integração
 
-<!-- Descrever os testes de integração -->
+Os testes de integração verificam a interação entre diferentes módulos ou componentes do sistema, garantindo que eles funcionem corretamente quando combinados. Eles são importantes para identificar problemas que não são visíveis nos testes unitários.
+
+Para rodar os testes de integração, utilize o comando:
+
+```bash
+pnpm test:integration
+```
 
 ### ♾️ Testes de Ponta a Ponta (E2E)
 
-<!-- Descrever os testes E2E -->
+Os testes de ponta a ponta simulam o comportamento real do usuário, testando o sistema como um todo. Eles garantem que o fluxo completo da aplicação funcione conforme esperado.
+
+Para rodar os testes e2e, utilize o comando:
+
+```bash
+pnpm test:e2e
+```
 
 ## 👤 Autor
 
